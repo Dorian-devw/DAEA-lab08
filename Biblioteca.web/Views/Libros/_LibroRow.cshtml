@@ -1,0 +1,19 @@
+@model Biblioteca.Web.Models.Libro
+
+<tr>
+    <td class="ps-4 fw-medium text-dark">@Model.Titulo</td>
+    <td class="text-secondary">@Model.AutorNombre</td>
+    <td class="text-muted"><small>@Model.ISBN</small></td>
+    <td>
+        <span class="badge @(Model.Ejemplares > 0 ? "bg-success" : "bg-danger") rounded-pill px-3">
+            @Model.Ejemplares disp.
+        </span>
+    </td>
+    <td class="text-end pe-4">
+        <div class="btn-group shadow-sm rounded-pill" role="group">
+            <a asp-action="Details" asp-route-id="@Model.LibroId" class="btn btn-sm btn-outline-primary">Detalles</a>
+            <a asp-action="Edit" asp-route-id="@Model.LibroId" class="btn btn-sm btn-outline-secondary">Editar</a>
+            <a asp-action="Delete" asp-route-id="@Model.LibroId" class="btn btn-sm btn-outline-danger">Eliminar</a>
+        </div>
+    </td>
+</tr>

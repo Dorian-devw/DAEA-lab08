@@ -1,0 +1,61 @@
+@model IEnumerable<Biblioteca.Web.Models.PrestamoReporte>
+
+@{
+    ViewData["Title"] = "Reporte de Préstamos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4 animate-fade-in-up">
+    <h1 class="display-6 fw-bold text-primary">@ViewData["Title"]</h1>
+</div>
+
+<div class="card shadow-sm border-0 mb-4 bg-light animate-fade-in-up delay-1">
+    <div class="card-body p-4">
+        <form asp-action="Reporte" method="get" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label for="desde" class="form-label fw-semibold text-secondary">Fecha Desde</label>
+                <input type="date" id="desde" name="desde" value="@ViewData["Desde"]" class="form-control form-control-lg rounded-3 border-0 shadow-sm" />
+            </div>
+            <div class="col-md-4">
+                <label for="hasta" class="form-label fw-semibold text-secondary">Fecha Hasta</label>
+                <input type="date" id="hasta" name="hasta" value="@ViewData["Hasta"]" class="form-control form-control-lg rounded-3 border-0 shadow-sm" />
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm w-100">Generar Reporte</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive bg-white rounded-3 shadow-sm border overflow-hidden animate-fade-in-up delay-2">
+    <table class="table table-hover table-borderless align-middle mb-0">
+        <thead class="table-dark border-bottom">
+            <tr>
+                <th class="ps-4">Socio</th>
+                <th>Libro</th>
+                <th>Fecha Límite</th>
+                <th class="pe-4">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="ps-4 fw-medium text-dark">@item.SocioNombre</td>
+                    <td class="text-secondary">@item.LibroTitulo</td>
+                    <td class="text-muted">@item.FechaLimite.ToShortDateString()</td>
+                    <td class="pe-4">
+                        <span class="badge @(item.Estado == "Devuelto" ? "bg-success" : "bg-warning text-dark") rounded-pill px-3">
+                            @item.Estado
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (!Model.Any())
+    {
+        <div class="text-center p-5 text-muted">
+            <p class="mb-0 fs-5">No se encontraron préstamos en el rango de fechas seleccionado.</p>
+        </div>
+    }
+</div>

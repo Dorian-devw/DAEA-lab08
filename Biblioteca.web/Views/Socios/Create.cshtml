@@ -1,0 +1,51 @@
+@model Biblioteca.Web.Models.Socio
+
+@{
+    ViewData["Title"] = "Nuevo Socio";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow border-0 rounded-4 mt-4">
+            <div class="card-header bg-success text-white text-center py-3 rounded-top-4">
+                <h3 class="mb-0 fw-bold">@ViewData["Title"]</h3>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <div class="mb-4">
+                        <label asp-for="DNI" class="form-label fw-semibold text-secondary"></label>
+                        <input asp-for="DNI" class="form-control form-control-lg rounded-3 bg-light border-0" placeholder="Número de Documento" />
+                        <span asp-validation-for="DNI" class="text-danger small mt-1 d-block"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Nombre" class="form-label fw-semibold text-secondary"></label>
+                        <input asp-for="Nombre" class="form-control form-control-lg rounded-3 bg-light border-0" placeholder="Nombre completo" />
+                        <span asp-validation-for="Nombre" class="text-danger small mt-1 d-block"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Email" class="form-label fw-semibold text-secondary"></label>
+                        <input asp-for="Email" type="email" class="form-control form-control-lg rounded-3 bg-light border-0" placeholder="correo@ejemplo.com" />
+                        <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mt-5">
+                        <a asp-action="Index" class="text-decoration-none text-muted fw-medium">
+                            Volver al listado
+                        </a>
+                        <button type="submit" class="btn btn-success btn-lg px-5 rounded-pill shadow-sm">
+                            Registrar Socio
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,38 @@
+@model Biblioteca.Web.Models.Libro
+
+@{
+    ViewData["Title"] = "Detalles del Libro";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow border-0 rounded-4 mt-4 overflow-hidden">
+            <div class="card-header bg-info text-white text-center py-4">
+                <h2 class="mb-0 fw-bold">@Model.Titulo</h2>
+            </div>
+            <div class="card-body p-5">
+                <dl class="row mb-0 fs-5">
+                    <dt class="col-sm-4 text-muted fw-normal">Autor</dt>
+                    <dd class="col-sm-8 fw-medium">@Model.AutorNombre</dd>
+
+                    <dt class="col-sm-4 text-muted fw-normal mt-3">ISBN</dt>
+                    <dd class="col-sm-8 fw-medium mt-3">@Model.ISBN</dd>
+
+                    <dt class="col-sm-4 text-muted fw-normal mt-3">Ejemplares Disponibles</dt>
+                    <dd class="col-sm-8 fw-medium mt-3">
+                        <span class="badge @(Model.Ejemplares > 0 ? "bg-success" : "bg-danger") rounded-pill px-3 py-2">
+                            @Model.Ejemplares
+                        </span>
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-light p-4 d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4">Volver</a>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.LibroId" class="btn btn-warning rounded-pill px-4 me-2">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@Model.LibroId" class="btn btn-danger rounded-pill px-4">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
